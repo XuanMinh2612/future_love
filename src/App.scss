@@ -1,0 +1,38 @@
+.App {
+    background-color: var(--color-primary);
+    height: 195px;
+    .App-header {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding-top: 23px;
+        p {
+            font-size: 128px;
+            font-weight: 400;
+            line-height: 171.39px;
+            margin: 0;
+        }
+        .img-love {
+            width: 133px;
+            height: 114px;
+            margin-left: 175px;
+            background-image: url(../image/Screenshot_1.png);
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+    }
+}
+
+@media (max-width: 1023px) {
+    .App {
+        height: 140px;
+        .App-header {
+            padding-top: 0;
+            p {
+                font-size: 100px;
+                font-weight: 400;
+                line-height: 140px;
+            }
+        }
+    }
+}
