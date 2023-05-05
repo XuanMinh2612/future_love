@@ -12,7 +12,7 @@ function SideBar() {
     <div className="wrapper-side-bar">
       <div className="side-bar">
         <ul>
-          <li>
+          <li style={{ marginTop: 180 }}>
             <NavLink
               to="/"
               className={({ isActive }) => (isActive ? "active" : "")}

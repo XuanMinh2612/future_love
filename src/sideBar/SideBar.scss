@@ -4,7 +4,10 @@
     width: 100vw;
     
     .side-bar {
-        
+        position: fixed;
+        top: 0px;
+        left: 0;
+        height: 100%;
         ul {
             background-color: var(--color-primary);
             width: var(--side-bar-width);
@@ -19,6 +22,7 @@
             align-items: center;
             gap: 40px;
             li {
+                margin-top: 80px;
                 .active {
                     color: #fff;
                 }

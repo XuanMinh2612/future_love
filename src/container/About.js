@@ -75,7 +75,19 @@ function About() {
   }, [image1, image2]);
 
   //
-
+  if (image1 != null) {
+    const femaleInput = document.getElementById("male");
+    if (femaleInput) {
+      femaleInput.style.display = "none";
+    }
+  }
+  if (image2 != null) {
+    const femaleInput = document.getElementById("female");
+    if (femaleInput) {
+      femaleInput.style.display = "none";
+    }
+  }
+  //
   const handleChangeImageMale = async (event) => {
     event.preventDefault();
     let file = event.target.files[0];
