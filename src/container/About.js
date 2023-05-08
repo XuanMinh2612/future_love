@@ -1,9 +1,10 @@
 import { Fragment, useEffect, useState } from "react";
 import "./About.scss";
 import axios from "axios";
+import ReactLoading from "react-loading";
 
 function About() {
-  const Api_key = "e9e2c780a5732849e994f6fdd7a8d358";
+  const Api_key = "2cf2b913a7ac3a600f597c5737bc3746";
   const server = "http://14.225.7.221:8000/hometh2";
 
   //
@@ -11,6 +12,7 @@ function About() {
   const [image1, setImage1] = useState(null);
   const [image2, setImage2] = useState(null);
   const [loadings, setLoadings] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const uploadImgMale = async () => {
     const formData = new FormData();
@@ -43,8 +45,8 @@ function About() {
     }
   };
   const fetchData = async () => {
+    setIsLoading(true);
     try {
-      setLoadings(true);
       await uploadImgMale();
       await uploadImgFeMale();
       const reponse = await axios.post(
@@ -59,9 +61,9 @@ function About() {
       );
       setData(reponse.data);
       console.log(reponse.data);
-      setLoadings(false);
+      setIsLoading(false);
     } catch (error) {
-      setLoadings(false);
+      setIsLoading(false);
 
       throw error;
     }
@@ -133,7 +135,17 @@ function About() {
           <i className="fas fa-sync-alt"></i>
         </button>
       </div>
-      <div>{loadings && <span>loading...</span>}</div>
+      {isLoading && (
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <ReactLoading type={"bars"} color={"#000000"} />
+        </div>
+      )}
       {data?.map((dt, index) => (
         <Fragment key={index}>
           <div className="img-swap">
