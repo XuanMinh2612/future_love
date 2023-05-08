@@ -7,6 +7,7 @@ import Shopping from "../container/Shopping";
 import Ending from "../container/Enading";
 
 import "./SideBar.scss";
+import ViewResult from "../container/View";
 function SideBar() {
   return (
     <div className="wrapper-side-bar">
@@ -64,6 +65,7 @@ function SideBar() {
       </div>
       <Routes>
         <Route path="/" element={<About />} />
+        <Route path="/:id" element={<ViewResult />} />
         <Route path="/Happy" element={<Happy />} />
         <Route path="/Sad" element={<Sad />} />
         <Route path="/Shopping" element={<Shopping />} />

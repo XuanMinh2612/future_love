@@ -2,7 +2,8 @@ import { Fragment, useEffect, useState } from "react";
 import "./About.scss";
 import axios from "axios";
 import ReactLoading from "react-loading";
-
+import { addDoc, collection } from "firebase/firestore";
+import { db } from "../firebase";
 function About() {
   const Api_key = "2cf2b913a7ac3a600f597c5737bc3746";
   const server = "http://14.225.7.221:8000/hometh2";
@@ -11,9 +12,8 @@ function About() {
   const [data, setData] = useState([]);
   const [image1, setImage1] = useState(null);
   const [image2, setImage2] = useState(null);
-  const [loadings, setLoadings] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-
+  const [link, setLink] = useState(null);
   const uploadImgMale = async () => {
     const formData = new FormData();
     formData.append("image", image1);
@@ -61,10 +61,16 @@ function About() {
       );
       setData(reponse.data);
       console.log(reponse.data);
+      const docRef = await addDoc(collection(db.getFirestore(), "futurelove"), {
+        data: reponse.data,
+        image1,
+        image2,
+      });
+      console.log("Document written with ID: ", docRef.id);
+      setLink(docRef.id);
       setIsLoading(false);
     } catch (error) {
       setIsLoading(false);
-
       throw error;
     }
   };
@@ -135,6 +141,15 @@ function About() {
           <i className="fas fa-sync-alt"></i>
         </button>
       </div>
+      <p
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        Link là: {`http://localhost:3000/${link}`}
+      </p>
       {isLoading && (
         <div
           style={{
