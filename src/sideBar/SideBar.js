@@ -63,15 +63,17 @@ function SideBar() {
           </li>
         </ul>
       </div>
-      <Routes>
-        <Route path="/" element={<About />} />
-        <Route path="/:id" element={<ViewResult />} />
-        <Route path="/Happy" element={<Happy />} />
-        <Route path="/Sad" element={<Sad />} />
-        <Route path="/Shopping" element={<Shopping />} />
-        <Route path="/NewStart" element={<NewStart />} />
-        <Route path="/Ending" element={<Ending />} />
-      </Routes>
+      <div className="main-content">
+        <Routes>
+          <Route path="/" element={<About />} />
+          <Route path="/:id" element={<ViewResult />} />
+          <Route path="/Happy" element={<Happy />} />
+          <Route path="/Sad" element={<Sad />} />
+          <Route path="/Shopping" element={<Shopping />} />
+          <Route path="/NewStart" element={<NewStart />} />
+          <Route path="/Ending" element={<Ending />} />
+        </Routes>
+      </div>
     </div>
   );
 }

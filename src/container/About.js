@@ -111,7 +111,6 @@ function About() {
       setImage2(file);
     }
   };
-
   return (
     <div className="wrapper-about">
       <div className="about-top">
@@ -141,15 +140,18 @@ function About() {
           <i className="fas fa-sync-alt"></i>
         </button>
       </div>
-      <p
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        Link là: {`http://localhost:3000/${link}`}
-      </p>
+      {link && (
+        <p
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            fontSize: "40px",
+          }}
+        >
+          Link là: {`http://localhost:3000/${link}`}
+        </p>
+      )}
       {isLoading && (
         <div
           style={{
