@@ -149,7 +149,9 @@ function About() {
             fontSize: "40px",
           }}
         >
-          Link là: {`${window.location.href}${link}`}
+          <a href={`${window.location.href}${link}`}>
+            Xem lại kết quả của bạn tại đây
+          </a>
         </p>
       )}
       {isLoading && (
