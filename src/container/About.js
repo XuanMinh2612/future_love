@@ -2,11 +2,11 @@ import { Fragment, useEffect, useState } from "react";
 import "./About.scss";
 import axios from "axios";
 import ReactLoading from "react-loading";
-import { addDoc, collection } from "firebase/firestore";
+import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { db } from "../firebase";
 function About() {
   const Api_key = "2cf2b913a7ac3a600f597c5737bc3746";
-  const server = "http://14.225.7.221:8000/hometh2";
+  const server = "http://14.225.7.221:8888/getdata";
 
   //
   const [data, setData] = useState([]);
@@ -65,6 +65,7 @@ function About() {
         data: reponse.data,
         image1,
         image2,
+        timestamp: serverTimestamp(),
       });
       console.log("Document written with ID: ", docRef.id);
       setLink(docRef.id);
@@ -172,7 +173,7 @@ function About() {
               className="img-swap-image"
               style={{ backgroundImage: `url(${dt.Link_img})` }}
             ></div>
-            <div className="name">Image Swap</div>
+            <div className="name">{dt.tensukien}</div>
           </div>
           <div className="about-main">
             <div className="future-love">{dt.thongtin}</div>

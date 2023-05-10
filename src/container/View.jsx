@@ -4,10 +4,11 @@ import axios from "axios";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../firebase";
 import { useParams } from "react-router-dom";
+
 function ViewResult() {
-  //
   const { id } = useParams();
   const [data, setData] = useState([]);
+  const [timestamp, setTimestamp] = useState(null);
 
   const fetchData = async () => {
     const docRef = doc(db.getFirestore(), "futurelove", id);
@@ -15,8 +16,8 @@ function ViewResult() {
     if (docSnap.exists()) {
       console.log("Document data:", docSnap.data());
       setData(docSnap.data());
+      setTimestamp(docSnap.data().timestamp?.toDate());
     } else {
-      // docSnap.data() will be undefined in this case
       console.log("No such document!");
     }
   };
@@ -43,10 +44,10 @@ function ViewResult() {
             className="image"
             style={{ backgroundImage: `url(${data?.image2})` }}
           ></div>
-          <div className="name">Name feMale</div>
+          <div className="name">Name Female</div>
         </div>
       </div>
-
+      <div className="name">Thời gian: {timestamp?.toLocaleString()}</div>
       {data?.data?.map((dt, index) => (
         <Fragment key={index}>
           <div className="img-swap">
@@ -54,7 +55,7 @@ function ViewResult() {
               className="img-swap-image"
               style={{ backgroundImage: `url(${dt.Link_img})` }}
             ></div>
-            <div className="name">Image Swap</div>
+            <div className="name">{dt.tensukien}</div>
           </div>
           <div className="about-main">
             <div className="future-love">{dt.thongtin}</div>

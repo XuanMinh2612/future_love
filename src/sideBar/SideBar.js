@@ -13,7 +13,7 @@ function SideBar() {
     <div className="wrapper-side-bar">
       <div className="side-bar">
         <ul>
-          <li style={{ marginTop: 180 }}>
+          <li>
             <NavLink
               to="/"
               className={({ isActive }) => (isActive ? "active" : "")}
@@ -63,17 +63,15 @@ function SideBar() {
           </li>
         </ul>
       </div>
-      <div className="main-content">
-        <Routes>
-          <Route path="/" element={<About />} />
-          <Route path="/:id" element={<ViewResult />} />
-          <Route path="/Happy" element={<Happy />} />
-          <Route path="/Sad" element={<Sad />} />
-          <Route path="/Shopping" element={<Shopping />} />
-          <Route path="/NewStart" element={<NewStart />} />
-          <Route path="/Ending" element={<Ending />} />
-        </Routes>
-      </div>
+      <Routes>
+        <Route path="/" element={<About />} />
+        <Route path="/:id" element={<ViewResult />} />
+        <Route path="/Happy" element={<Happy />} />
+        <Route path="/Sad" element={<Sad />} />
+        <Route path="/Shopping" element={<Shopping />} />
+        <Route path="/NewStart" element={<NewStart />} />
+        <Route path="/Ending" element={<Ending />} />
+      </Routes>
     </div>
   );
 }
