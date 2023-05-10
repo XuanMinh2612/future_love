@@ -8,6 +8,7 @@ import Ending from "../container/Enading";
 
 import "./SideBar.scss";
 import ViewResult from "../container/View";
+
 function SideBar() {
   return (
     <div className="wrapper-side-bar">
@@ -26,7 +27,7 @@ function SideBar() {
               to="/Happy"
               className={({ isActive }) => (isActive ? "active" : "")}
             >
-              Happy
+              History
             </NavLink>
           </li>
           <li>
@@ -63,15 +64,6 @@ function SideBar() {
           </li>
         </ul>
       </div>
-      <Routes>
-        <Route path="/" element={<About />} />
-        <Route path="/:id" element={<ViewResult />} />
-        <Route path="/Happy" element={<Happy />} />
-        <Route path="/Sad" element={<Sad />} />
-        <Route path="/Shopping" element={<Shopping />} />
-        <Route path="/NewStart" element={<NewStart />} />
-        <Route path="/Ending" element={<Ending />} />
-      </Routes>
     </div>
   );
 }

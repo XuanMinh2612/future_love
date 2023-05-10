@@ -175,8 +175,8 @@ function About() {
             ></div>
             <div className="name">{dt.tensukien}</div>
           </div>
-          <div className="about-main">
-            <div className="future-love">{dt.thongtin}</div>
+          <div className="about-main flex justify-center   ">
+            <div className="future-love  max-w-7xl">{dt.thongtin}</div>
           </div>
         </Fragment>
       ))}
