@@ -149,7 +149,7 @@ function About() {
             fontSize: "40px",
           }}
         >
-          Link là: {`http://localhost:3000/${link}`}
+          Link là: {`${window.location.href}${link}`}
         </p>
       )}
       {isLoading && (

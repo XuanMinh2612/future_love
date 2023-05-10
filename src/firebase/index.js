@@ -2,19 +2,20 @@
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import * as firestore from "firebase/firestore";
+
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyDLnQze3KxNacrJkge2NFSCmehzJr7yteQ",
-  authDomain: "future-love-281ec.firebaseapp.com",
-  projectId: "future-love-281ec",
-  storageBucket: "future-love-281ec.appspot.com",
-  messagingSenderId: "151469165743",
-  appId: "1:151469165743:web:1f65757304779cbefad85a",
-  measurementId: "G-SBT5XSWHQ4",
+  apiKey: "AIzaSyBxy1j3gVBl5XWItfjsObxEQyFO-JQtIvk",
+  authDomain: "future-love-82e26.firebaseapp.com",
+  projectId: "future-love-82e26",
+  storageBucket: "future-love-82e26.appspot.com",
+  messagingSenderId: "773045950861",
+  appId: "1:773045950861:web:5327f65811e92de57805c4",
+  measurementId: "G-LESK55KLS2",
 };
 
 // Initialize Firebase
