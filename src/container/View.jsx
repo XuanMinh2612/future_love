@@ -1,7 +1,6 @@
 import { Fragment, useEffect, useState } from "react";
 import "./About.scss";
 import axios from "axios";
-import ReactLoading from "react-loading";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../firebase";
 import { useParams } from "react-router-dom";
@@ -23,7 +22,6 @@ function ViewResult() {
   };
 
   useEffect(() => {
-    console.log("useefêcr");
     fetchData();
   }, []);
 
