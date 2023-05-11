@@ -16,7 +16,7 @@ function SideBar() {
         <ul>
           <li>
             <NavLink
-              to="/"
+              to="/About"
               className={({ isActive }) => (isActive ? "active" : "")}
             >
               About
@@ -24,7 +24,7 @@ function SideBar() {
           </li>
           <li>
             <NavLink
-              to="/Happy"
+              to="/"
               className={({ isActive }) => (isActive ? "active" : "")}
             >
               History

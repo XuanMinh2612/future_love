@@ -17,14 +17,14 @@ function App() {
         <div className="img-love"></div>
       </header>
       <div className="flex flex-row">
-        <div className="h-screen">
+        <div className="">
           <SideBar />
         </div>
-        <div className="flex justify-center w-screen max-h-[100vh] overflow-scroll">
+        <div className="flex justify-center w-screen">
           <Routes>
-            <Route path="/" element={<About />} />
+            <Route path="/About" element={<About />} />
             <Route path="/:id" element={<ViewResult />} />
-            <Route path="/Happy" element={<Happy />} />
+            <Route path="/" element={<Happy />} />
             <Route path="/Sad" element={<Sad />} />
             <Route path="/Shopping" element={<Shopping />} />
             <Route path="/NewStart" element={<NewStart />} />

@@ -47,7 +47,7 @@ function ViewResult() {
           <div className="name">Name Female</div>
         </div>
       </div>
-      <div className="name">Thời gian: {timestamp?.toLocaleString()}</div>
+
       {data?.data?.map((dt, index) => (
         <Fragment key={index}>
           <div className="img-swap">
@@ -57,8 +57,8 @@ function ViewResult() {
             ></div>
             <div className="name">{dt.tensukien}</div>
           </div>
-          <div className="about-main">
-            <div className="future-love">{dt.thongtin}</div>
+          <div className="about-main flex justify-center   ">
+            <div className="future-love  max-w-7xl">{dt.thongtin}</div>
           </div>
         </Fragment>
       ))}
