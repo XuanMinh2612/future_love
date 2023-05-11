@@ -7,7 +7,7 @@ import { db } from "../firebase";
 function About() {
   const Api_key = "2cf2b913a7ac3a600f597c5737bc3746";
   const server = "http://14.225.7.221:8888/getdata";
-  const mySqlApi = "http://14.225.7.221:8888/getid";
+
   //
   const [data, setData] = useState([]);
   const [image1, setImage1] = useState(null);
@@ -44,20 +44,6 @@ function About() {
       throw error;
     }
   };
-  // const saveDataToMySQL = async () => {
-  //   try {
-  //     const response = await axios.post(server, {
-  //       data: data,
-  //       image1: image1,
-  //       image2: image2,
-  //       timestamp: Date.now(),
-  //     });
-  //     console.log("Kết quả từ API:", response.data);
-  //   } catch (error) {
-  //     console.error("Lỗi khi gửi yêu cầu:", error);
-  //   }
-  // };
-
   const fetchData = async () => {
     setIsLoading(true);
     try {
@@ -73,32 +59,16 @@ function About() {
           },
         }
       );
-      // setData(reponse.data);
-      // console.log(reponse.data);
-      // const docRef = await addDoc(collection(db.getFirestore(), "futurelove"), {
-      //   data: reponse.data,
-      //   image1,
-      //   image2,
-      //   timestamp: serverTimestamp(),
-      // });
-      // console.log("Document written with ID: ", docRef.id);
-      const saveDataToMySQL = async () => {
-        try {
-          const response = await axios.post(mySqlApi, {
-            data: data,
-            image1: image1,
-            image2: image2,
-            timestamp: Date.now(),
-          });
-          console.log("Document written with ID: ", reponse.id);
-        } catch (error) {
-          console.error("Lỗi khi gửi yêu cầu:", error);
-        }
-      };
       setData(reponse.data);
       console.log(reponse.data);
-      await saveDataToMySQL();
-      setLink(reponse.data.id);
+      const docRef = await addDoc(collection(db.getFirestore(), "futurelove"), {
+        data: reponse.data,
+        image1,
+        image2,
+        timestamp: serverTimestamp(),
+      });
+      console.log("Document written with ID: ", docRef.id);
+      setLink(docRef.id);
       setIsLoading(false);
     } catch (error) {
       setIsLoading(false);
@@ -167,6 +137,7 @@ function About() {
       </div>
       <div className="about-bottom">
         <button onClick={fetchData}>
+          {data.length > 0 ? "Try again" : "Start"}{" "}
           <i className="fas fa-sync-alt"></i>
         </button>
       </div>
@@ -179,7 +150,11 @@ function About() {
             fontSize: "40px",
           }}
         >
-          <a href={`${window.location.href}${link}`}>
+          <a
+            href={
+              link ? `${window.location.href.replace("About", "")}${link}` : "#"
+            }
+          >
             Xem lại kết quả của bạn tại đây
           </a>
         </p>
