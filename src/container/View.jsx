@@ -27,7 +27,7 @@ function ViewResult() {
   }, []);
 
   return (
-    <div className="wrapper-about">
+    <div className="wrapper-about flex flex-col justify-center content-center">
       <div className="about-top">
         <div className="male">
           <div
@@ -57,11 +57,17 @@ function ViewResult() {
             ></div>
             <div className="name">{dt.tensukien}</div>
           </div>
-          <div className="about-main flex justify-center   ">
-            <div className="future-love  max-w-7xl">{dt.thongtin}</div>
+          <div className="about-main flex justify-center">
+            <div className="future-love max-w-7xl">{dt.thongtin}</div>
           </div>
         </Fragment>
       ))}
+
+      <div className="flex justify-center mt-4">
+        <button className="border-solid border-2 h-28 w-[246px] border-sky-500 font-semibold text-6xl bg-[#ff9f9f] rounded-[10px] p-2 hover:bg-fuchsia-200">
+          Comment
+        </button>
+      </div>
     </div>
   );
 }

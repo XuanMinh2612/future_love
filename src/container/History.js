@@ -2,8 +2,9 @@ import { useEffect, useState } from "react";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../firebase";
 import ReactLoading from "react-loading";
+import { format } from "date-fns";
 
-function Happy() {
+function History() {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [loadingType, setLoadingType] = useState(null);
@@ -18,6 +19,9 @@ function Happy() {
       const timestamp = doc.data().timestamp?.toDate();
       dataList.push({ id, timestamp });
     });
+
+    // Sắp xếp dataList theo thứ tự giảm dần của timestamp
+    dataList.sort((a, b) => b.timestamp - a.timestamp);
 
     setData(dataList);
     setIsLoading(false);
@@ -42,6 +46,9 @@ function Happy() {
     fetchData();
   }, []);
 
+  const formatDateTime = (dateTime) => {
+    return format(dateTime, "HH:mm:ss dd/MM/yyyy");
+  };
   return (
     <div className="flex justify-center items-center content-center font-sans">
       {isLoading ? (
@@ -58,14 +65,14 @@ function Happy() {
               key={item.id}
               className="flex justify-between items-center p-4 border-b border-gray-300 text-3xl"
             >
-              <span className="font-semibold	 mr-20 text-4xl">ID:</span>
+              <span className="font-semibold mr-20 text-4xl">ID:</span>
               <a href={`${window.location.href}${item.id}`}>
                 Xem lại kết quả của bạn tại đây
               </a>
-              <span className="font-semibold	mr-20 ml-36 text-4xl ">
+              <span className="font-semibold mr-20 ml-36 text-4xl">
                 Thời gian:
               </span>{" "}
-              {item.timestamp?.toString()}
+              {item.timestamp ? formatDateTime(item.timestamp) : ""}
             </li>
           ))}
         </ul>
@@ -74,4 +81,4 @@ function Happy() {
   );
 }
 
-export default Happy;
+export default History;

@@ -7,7 +7,7 @@ import { db } from "../firebase";
 function About() {
   const Api_key = "2cf2b913a7ac3a600f597c5737bc3746";
   const server = "http://14.225.7.221:8888/getdata";
-
+  const saveData = "http://14.225.7.221:8888/getid";
   //
   const [data, setData] = useState([]);
   const [image1, setImage1] = useState(null);
@@ -15,6 +15,8 @@ function About() {
   const [isLoading, setIsLoading] = useState(false);
   const [link, setLink] = useState(null);
   const uploadImgMale = async () => {
+    setIsLoading(true); // Bật loading
+
     const formData = new FormData();
     formData.append("image", image1);
     try {
@@ -27,9 +29,13 @@ function About() {
       }
     } catch (error) {
       throw error;
+    } finally {
+      setIsLoading(false); // Tắt loading
     }
   };
+
   const uploadImgFeMale = async () => {
+    setIsLoading(true);
     const formData = new FormData();
     formData.append("image", image2);
     try {
@@ -42,8 +48,11 @@ function About() {
       }
     } catch (error) {
       throw error;
+    } finally {
+      setIsLoading(false); // Tắt loading
     }
   };
+
   const fetchData = async () => {
     setIsLoading(true);
     try {

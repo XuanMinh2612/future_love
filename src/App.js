@@ -3,7 +3,7 @@ import About from "./container/About";
 import "./container/tailwincss.css";
 import SideBar from "./sideBar/SideBar";
 import { NavLink, Route, Routes } from "react-router-dom";
-import Happy from "./container/Happy";
+import History from "./container/History";
 import Sad from "./container/Sad";
 import NewStart from "./container/NewStart";
 import Shopping from "./container/Shopping";
@@ -24,7 +24,7 @@ function App() {
           <Routes>
             <Route path="/About" element={<About />} />
             <Route path="/:id" element={<ViewResult />} />
-            <Route path="/" element={<Happy />} />
+            <Route path="/" element={<History />} />
             <Route path="/Sad" element={<Sad />} />
             <Route path="/Shopping" element={<Shopping />} />
             <Route path="/NewStart" element={<NewStart />} />
