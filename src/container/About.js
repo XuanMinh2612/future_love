@@ -4,6 +4,8 @@ import axios from "axios";
 import ReactLoading from "react-loading";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { db } from "../firebase";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 function About() {
   const Api_key = "4b92af7f16b0fb074cc5e1c7adfa512a";
   const server = "http://14.225.7.221:8888/getdata";
@@ -14,12 +16,17 @@ function About() {
   const [image2, setImage2] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [link, setLink] = useState(null);
+
   const uploadImgMale = async () => {
     setIsLoading(true);
     const formData = new FormData();
     formData.append("image", image1);
     try {
       if (image1 != null) {
+        const femaleInput = document.getElementById("male");
+        if (femaleInput) {
+          femaleInput.style.display = "none";
+        }
         let apiresponse = await axios.post(
           `https://api.imgbb.com/1/upload?key=${Api_key}`,
           formData
@@ -39,6 +46,10 @@ function About() {
     formData.append("image", image2);
     try {
       if (image2 != null) {
+        const femaleInput = document.getElementById("female");
+        if (femaleInput) {
+          femaleInput.style.display = "none";
+        }
         let apiresponse = await axios.post(
           `https://api.imgbb.com/1/upload?key=${Api_key}`,
           formData
@@ -77,6 +88,7 @@ function About() {
       });
       console.log("Document written with ID: ", docRef.id);
       setLink(docRef.id);
+      toast.success("Upload và lưu dữ liệu thành công");
       setIsLoading(false);
     } catch (error) {
       setIsLoading(false);
@@ -91,20 +103,6 @@ function About() {
     console.log("useefêcr");
   }, [image1, image2]);
 
-  //
-  if (image1 != null) {
-    const femaleInput = document.getElementById("male");
-    if (femaleInput) {
-      femaleInput.style.display = "none";
-    }
-  }
-  if (image2 != null) {
-    const femaleInput = document.getElementById("female");
-    if (femaleInput) {
-      femaleInput.style.display = "none";
-    }
-  }
-  //
   const handleChangeImageMale = async (event) => {
     event.preventDefault();
     let file = event.target.files[0];
