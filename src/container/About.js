@@ -5,7 +5,7 @@ import ReactLoading from "react-loading";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { db } from "../firebase";
 function About() {
-  const Api_key = "2cf2b913a7ac3a600f597c5737bc3746";
+  const Api_key = "4b92af7f16b0fb074cc5e1c7adfa512a";
   const server = "http://14.225.7.221:8888/getdata";
   const saveData = "http://14.225.7.221:8888/getid";
   //
@@ -15,8 +15,7 @@ function About() {
   const [isLoading, setIsLoading] = useState(false);
   const [link, setLink] = useState(null);
   const uploadImgMale = async () => {
-    setIsLoading(true); // Bật loading
-
+    setIsLoading(true);
     const formData = new FormData();
     formData.append("image", image1);
     try {
@@ -30,7 +29,7 @@ function About() {
     } catch (error) {
       throw error;
     } finally {
-      setIsLoading(false); // Tắt loading
+      setIsLoading(false);
     }
   };
 
@@ -49,7 +48,7 @@ function About() {
     } catch (error) {
       throw error;
     } finally {
-      setIsLoading(false); // Tắt loading
+      setIsLoading(false);
     }
   };
 

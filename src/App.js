@@ -12,7 +12,7 @@ import ViewResult from "./container/View";
 function App() {
   return (
     <div className="App">
-      <header className="App-header ">
+      <header className="App-header static">
         <p>Future Love</p>
         <div className="img-love"></div>
       </header>
