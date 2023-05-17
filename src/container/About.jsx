@@ -8,7 +8,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 function About() {
   const Api_key = "4b92af7f16b0fb074cc5e1c7adfa512a";
-  const server = "http://14.225.7.221:8888/getdata";
+  const server = "http://14.225.7.221:8889/getdata";
   const saveData = "http://14.225.7.221:8888/getid";
   //
   const [data, setData] = useState([]);
@@ -18,7 +18,6 @@ function About() {
   const [link, setLink] = useState(null);
 
   const uploadImgMale = async () => {
-    setIsLoading(true);
     const formData = new FormData();
     formData.append("image", image1);
     try {
@@ -36,12 +35,10 @@ function About() {
     } catch (error) {
       throw error;
     } finally {
-      setIsLoading(false);
     }
   };
 
   const uploadImgFeMale = async () => {
-    setIsLoading(true);
     const formData = new FormData();
     formData.append("image", image2);
     try {
@@ -59,7 +56,6 @@ function About() {
     } catch (error) {
       throw error;
     } finally {
-      setIsLoading(false);
     }
   };
 
@@ -86,10 +82,11 @@ function About() {
         image2,
         timestamp: serverTimestamp(),
       });
-      console.log("Document written with ID: ", docRef.id);
-      setLink(docRef.id);
-      toast.success("Upload và lưu dữ liệu thành công");
+      setData(reponse.data);
+      console.log(reponse.data);
+      setLink(reponse.data.id);
       setIsLoading(false);
+      toast.success("Upload và lưu dữ liệu thành công");
     } catch (error) {
       setIsLoading(false);
       throw error;
@@ -99,7 +96,6 @@ function About() {
   useEffect(() => {
     uploadImgFeMale();
     uploadImgMale();
-
     console.log("useefêcr");
   }, [image1, image2]);
 
@@ -143,7 +139,7 @@ function About() {
       </div>
       <div className="about-bottom">
         <button onClick={fetchData}>
-          {data.length > 0 ? "Try again" : "Start"}{" "}
+          {data.length > 0 ? "Try again" : "Start"}
           <i className="fas fa-sync-alt"></i>
         </button>
       </div>
@@ -176,7 +172,7 @@ function About() {
           <ReactLoading type={"bars"} color={"#000000"} />
         </div>
       )}
-      {data?.map((dt, index) => (
+      {data?.json1?.map((dt, index) => (
         <Fragment key={index}>
           <div className="img-swap">
             <div

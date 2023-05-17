@@ -1,6 +1,4 @@
 import { useEffect, useState } from "react";
-import { collection, getDocs } from "firebase/firestore";
-import { db } from "../firebase";
 import ReactLoading from "react-loading";
 import { format } from "date-fns";
 
@@ -10,21 +8,17 @@ function History() {
   const [loadingType, setLoadingType] = useState(null);
 
   const fetchData = async () => {
-    const collectionRef = collection(db.getFirestore(), "futurelove");
-    const querySnapshot = await getDocs(collectionRef);
-
-    const dataList = [];
-    querySnapshot.forEach((doc) => {
-      const id = doc.id;
-      const timestamp = doc.data().timestamp?.toDate();
-      dataList.push({ id, timestamp });
-    });
-
-    // Sắp xếp dataList theo thứ tự giảm dần của timestamp
-    dataList.sort((a, b) => b.timestamp - a.timestamp);
-
-    setData(dataList);
-    setIsLoading(false);
+    try {
+      const response = await fetch("http://14.225.7.221:8889/lovehistory/all");
+      if (!response.ok) {
+        throw new Error("Failed to fetch data");
+      }
+      const jsonData = await response.json();
+      setData(jsonData[0]); // Lấy dữ liệu từ mảng nằm trong jsonData
+      setIsLoading(false);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   useEffect(() => {
@@ -47,8 +41,9 @@ function History() {
   }, []);
 
   const formatDateTime = (dateTime) => {
-    return format(dateTime, "HH:mm:ss dd/MM/yyyy");
+    return format(new Date(dateTime), "HH:mm:ss dd/MM/yyyy"); // Chuyển đổi thành đối tượng Date trước khi định dạng
   };
+
   return (
     <div className="flex justify-center items-center content-center font-sans">
       {isLoading ? (
@@ -65,14 +60,15 @@ function History() {
               key={item.id}
               className="flex justify-between items-center p-4 border-b border-gray-300 text-3xl"
             >
-              <span className="font-semibold mr-20 text-4xl">ID:</span>
+              <span className="font-semibold mr-20 text-4xl">
+                ID: {item.id}
+              </span>
               <a href={`${window.location.href}${item.id}`}>
                 Xem lại kết quả của bạn tại đây
               </a>
               <span className="font-semibold mr-20 ml-36 text-4xl">
-                Thời gian:
+                Thời gian: {item.real_time}
               </span>{" "}
-              {item.timestamp ? formatDateTime(item.timestamp) : ""}
             </li>
           ))}
         </ul>

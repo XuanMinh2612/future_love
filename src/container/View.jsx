@@ -1,30 +1,26 @@
 import { Fragment, useEffect, useState } from "react";
 import "./About.scss";
 import axios from "axios";
-import { doc, getDoc } from "firebase/firestore";
-import { db } from "../firebase";
 import { useParams } from "react-router-dom";
 
 function ViewResult() {
   const { id } = useParams();
   const [data, setData] = useState([]);
-  const [timestamp, setTimestamp] = useState(null);
 
   const fetchData = async () => {
-    const docRef = doc(db.getFirestore(), "futurelove", id);
-    const docSnap = await getDoc(docRef);
-    if (docSnap.exists()) {
-      console.log("Document data:", docSnap.data());
-      setData(docSnap.data());
-      setTimestamp(docSnap.data().timestamp?.toDate());
-    } else {
-      console.log("No such document!");
+    try {
+      const response = await axios.get(
+        `http://14.225.7.221:8889/lovehistory/${id}`
+      );
+      setData(response.data);
+    } catch (error) {
+      console.log(error);
     }
   };
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [id]);
 
   return (
     <div className="wrapper-about flex flex-col justify-center content-center">
@@ -32,7 +28,7 @@ function ViewResult() {
         <div className="male">
           <div
             className="image"
-            style={{ backgroundImage: `url(${data?.image1})` }}
+            style={{ backgroundImage: `url(${data?.link_nam_goc})` }}
           ></div>
           <div className="name">
             <p>Name Male</p>
@@ -42,23 +38,23 @@ function ViewResult() {
         <div className="female">
           <div
             className="image"
-            style={{ backgroundImage: `url(${data?.image2})` }}
+            style={{ backgroundImage: `url(${data?.link_nu_goc})` }}
           ></div>
           <div className="name">Name Female</div>
         </div>
       </div>
 
-      {data?.data?.map((dt, index) => (
+      {data?.map((dt, index) => (
         <Fragment key={index}>
           <div className="img-swap">
             <div
               className="img-swap-image"
-              style={{ backgroundImage: `url(${dt.Link_img})` }}
+              style={{ backgroundImage: `url(${dt.link_da_swap})` }}
             ></div>
-            <div className="name">{dt.tensukien}</div>
+            <div className="name">{dt.ten_su_kien}</div>
           </div>
           <div className="about-main flex justify-center">
-            <div className="future-love max-w-7xl">{dt.thongtin}</div>
+            <div className="future-love max-w-7xl">{dt.noi_dung_su_kien}</div>
           </div>
         </Fragment>
       ))}
