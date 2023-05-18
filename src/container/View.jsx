@@ -28,7 +28,7 @@ function ViewResult() {
         <div className="male">
           <div
             className="image"
-            style={{ backgroundImage: `url(${data?.link_nam_goc})` }}
+            style={{ backgroundImage: `url(${data[0]?.link_nam_goc})` }}
           ></div>
           <div className="name">
             <p>Name Male</p>
@@ -38,7 +38,7 @@ function ViewResult() {
         <div className="female">
           <div
             className="image"
-            style={{ backgroundImage: `url(${data?.link_nu_goc})` }}
+            style={{ backgroundImage: `url(${data[0]?.link_nu_goc})` }}
           ></div>
           <div className="name">Name Female</div>
         </div>

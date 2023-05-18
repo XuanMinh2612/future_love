@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import ReactLoading from "react-loading";
-import { format } from "date-fns";
+import { format, zonedTimeToUtc } from "date-fns";
 
 function History() {
   const [data, setData] = useState([]);
@@ -14,10 +14,12 @@ function History() {
         throw new Error("Failed to fetch data");
       }
       const jsonData = await response.json();
-      setData(jsonData[0]); // Lấy dữ liệu từ mảng nằm trong jsonData
+      setData(jsonData);
+      console.log(jsonData);
       setIsLoading(false);
     } catch (error) {
       console.log(error);
+      setIsLoading(false); // Set isLoading to false in case of error
     }
   };
 
@@ -41,8 +43,14 @@ function History() {
   }, []);
 
   const formatDateTime = (dateTime) => {
-    return format(new Date(dateTime), "HH:mm:ss dd/MM/yyyy"); // Chuyển đổi thành đối tượng Date trước khi định dạng
+    return format(new Date(dateTime), "HH:mm:ss dd/MM/yyyy");
   };
+  //sap xep thoi gian theo thu tu tu moi den cu~
+  const sortedData = data.sort((a, b) => {
+    const dateA = new Date(a[0].real_time);
+    const dateB = new Date(b[0].real_time);
+    return dateB - dateA;
+  });
 
   return (
     <div className="flex justify-center items-center content-center font-sans">
@@ -54,24 +62,27 @@ function History() {
           </div>
         </div>
       ) : (
-        <ul className="flex flex-col w-3/4 mx-auto ">
-          {data.map((item) => (
-            <li
-              key={item.id}
-              className="flex justify-between items-center p-4 border-b border-gray-300 text-3xl"
-            >
-              <span className="font-semibold mr-20 text-4xl">
-                ID: {item.id}
-              </span>
-              <a href={`${window.location.href}${item.id}`}>
-                Xem lại kết quả của bạn tại đây
-              </a>
-              <span className="font-semibold mr-20 ml-36 text-4xl">
-                Thời gian: {item.real_time}
-              </span>{" "}
-            </li>
+        <div className="w-[800px] mx-auto">
+          {sortedData.map((array, index) => (
+            <div key={index} className="my-8">
+              {array.length > 0 && (
+                <div className="p-4 border-b border-gray-300 text-3xl">
+                  <span className="font-semibold mr-20 text-4xl">
+                    ID: {array[0].id_toan_bo_su_kien}
+                  </span>
+                  <a
+                    href={`${window.location.href}${array[0].id_toan_bo_su_kien}`}
+                  >
+                    Xem lại kết quả tại đây
+                  </a>
+                  <span className="font-semibold mr-20 ml-36 text-4xl">
+                    Thời gian: {formatDateTime(array[0].real_time)}
+                  </span>
+                </div>
+              )}
+            </div>
           ))}
-        </ul>
+        </div>
       )}
     </div>
   );

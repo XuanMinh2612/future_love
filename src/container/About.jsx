@@ -9,8 +9,7 @@ import "react-toastify/dist/ReactToastify.css";
 function About() {
   const Api_key = "4b92af7f16b0fb074cc5e1c7adfa512a";
   const server = "http://14.225.7.221:8889/getdata";
-  const saveData = "http://14.225.7.221:8888/getid";
-  //
+
   const [data, setData] = useState([]);
   const [image1, setImage1] = useState(null);
   const [image2, setImage2] = useState(null);
