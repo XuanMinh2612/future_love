@@ -1,11 +1,14 @@
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useEffect, useState, useRef } from "react";
 import "./About.scss";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import useEvenStore from "../Store";
 
 function ViewResult() {
   const { id } = useParams();
   const [data, setData] = useState([]);
+  const setEvent = useEvenStore((state) => state.setEvent);
+  const eventRefs = useRef([]);
 
   const fetchData = async () => {
     try {
@@ -13,6 +16,7 @@ function ViewResult() {
         `http://14.225.7.221:8889/lovehistory/${id}`
       );
       setData(response.data);
+      setEvent(response.data);
     } catch (error) {
       console.log(error);
     }
@@ -21,6 +25,13 @@ function ViewResult() {
   useEffect(() => {
     fetchData();
   }, [id]);
+
+  const handleEventClick = (index) => {
+    const eventElement = eventRefs.current[index];
+    if (eventElement) {
+      eventElement.scrollIntoView({ behavior: "smooth" });
+    }
+  };
 
   return (
     <div className="wrapper-about flex flex-col justify-center content-center">
@@ -43,7 +54,6 @@ function ViewResult() {
           <div className="name">Name Female</div>
         </div>
       </div>
-
       {data?.map((dt, index) => (
         <Fragment key={index}>
           <div className="img-swap">
@@ -54,11 +64,16 @@ function ViewResult() {
             <div className="name">{dt.ten_su_kien}</div>
           </div>
           <div className="about-main flex justify-center">
-            <div className="future-love max-w-7xl">{dt.noi_dung_su_kien}</div>
+            <div
+              className="future-love max-w-7xl"
+              ref={(el) => (eventRefs.current[index] = el)}
+              id={"#" + dt.ten_su_kien}
+            >
+              {dt.noi_dung_su_kien}
+            </div>
           </div>
         </Fragment>
       ))}
-
       <div className="flex justify-center mt-4">
         <button className="border-solid border-2 h-28 w-[246px] border-sky-500 font-semibold text-6xl bg-[#ff9f9f] rounded-[10px] p-2 hover:bg-fuchsia-200">
           Comment

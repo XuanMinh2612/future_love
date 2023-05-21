@@ -6,6 +6,7 @@ import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { db } from "../firebase";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useNavigate } from "react-router-dom";
 function About() {
   const Api_key = "4b92af7f16b0fb074cc5e1c7adfa512a";
   const server = "http://14.225.7.221:8889/getdata";
@@ -15,7 +16,7 @@ function About() {
   const [image2, setImage2] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [link, setLink] = useState(null);
-
+  const navigate = useNavigate();
   const uploadImgMale = async () => {
     const formData = new FormData();
     formData.append("image", image1);
@@ -81,17 +82,15 @@ function About() {
         image2,
         timestamp: serverTimestamp(),
       });
-      setData(reponse.data);
-      console.log(reponse.data);
       setLink(reponse.data.id);
       setIsLoading(false);
       toast.success("Upload và lưu dữ liệu thành công");
+      navigate("/" + reponse.data.json2[0].id);
     } catch (error) {
       setIsLoading(false);
       throw error;
     }
   };
-  // http://14.225.7.221:7778/hometh2
   useEffect(() => {
     uploadImgFeMale();
     uploadImgMale();
@@ -142,7 +141,7 @@ function About() {
           <i className="fas fa-sync-alt"></i>
         </button>
       </div>
-      {link && (
+      {/* {link && (
         <p
           style={{
             display: "flex",
@@ -159,7 +158,7 @@ function About() {
             Xem lại kết quả của bạn tại đây
           </a>
         </p>
-      )}
+      )} */}
       {isLoading && (
         <div
           style={{
@@ -171,7 +170,7 @@ function About() {
           <ReactLoading type={"bars"} color={"#000000"} />
         </div>
       )}
-      {data?.json1?.map((dt, index) => (
+      {/* {data?.json1?.map((dt, index) => (
         <Fragment key={index}>
           <div className="img-swap">
             <div
@@ -184,7 +183,7 @@ function About() {
             <div className="future-love  max-w-7xl">{dt.thongtin}</div>
           </div>
         </Fragment>
-      ))}
+      ))} */}
     </div>
   );
 }
