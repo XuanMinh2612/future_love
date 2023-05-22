@@ -51,7 +51,12 @@ function History() {
   const formatDateTime = (dateTime) => {
     return format(new Date(dateTime), "HH:mm:ss dd/MM/yyyy");
   };
-
+  //sap xep thoi gian theo thu tu tu moi den cu~
+  const sortedData = data.sort((a, b) => {
+    const dateA = new Date(a[0].real_time);
+    const dateB = new Date(b[0].real_time);
+    return dateB - dateA;
+  });
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
@@ -67,7 +72,7 @@ function History() {
         </div>
       ) : (
         <div className="w-[800px] mx-auto">
-          {currentResults.map((array, index) => (
+          {sortedData.map((array, index) => (
             <div key={index} className="my-8">
               {array.length > 0 && (
                 <div className="p-4 border-b border-gray-300 text-3xl">
