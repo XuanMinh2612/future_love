@@ -9,10 +9,6 @@ function History() {
   const [currentPage, setCurrentPage] = useState(1);
 
   const resultsPerPage = 25;
-  const totalPages = Math.ceil(data.length / resultsPerPage);
-  const indexOfLastResult = currentPage * resultsPerPage;
-  const indexOfFirstResult = indexOfLastResult - resultsPerPage;
-  const currentResults = data.slice(indexOfFirstResult, indexOfLastResult);
 
   const fetchData = async () => {
     try {
@@ -51,15 +47,25 @@ function History() {
   const formatDateTime = (dateTime) => {
     return format(new Date(dateTime), "HH:mm:ss dd/MM/yyyy");
   };
-  //sap xep thoi gian theo thu tu tu moi den cu~
+
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
   const sortedData = data.sort((a, b) => {
     const dateA = new Date(a[0].real_time);
     const dateB = new Date(b[0].real_time);
     return dateB - dateA;
   });
-  const handlePageChange = (pageNumber) => {
-    setCurrentPage(pageNumber);
-  };
+
+  const indexOfLastResult = currentPage * resultsPerPage;
+  const indexOfFirstResult = indexOfLastResult - resultsPerPage;
+  const currentResults = sortedData.slice(
+    indexOfFirstResult,
+    indexOfLastResult
+  );
+
+  const totalPages = Math.ceil(sortedData.length / resultsPerPage);
 
   return (
     <div className="flex justify-center items-center content-center font-sans">
@@ -72,7 +78,7 @@ function History() {
         </div>
       ) : (
         <div className="w-[800px] mx-auto">
-          {sortedData.map((array, index) => (
+          {currentResults.map((array, index) => (
             <div key={index} className="my-8">
               {array.length > 0 && (
                 <div className="p-4 border-b border-gray-300 text-3xl">
@@ -92,15 +98,14 @@ function History() {
             </div>
           ))}
 
-          <div className="pagination  text-4xl flex justify-center">
+          <div className="pagination text-4xl flex justify-center">
             {Array.from({ length: totalPages }, (_, index) => index + 1).map(
               (pageNumber) => (
                 <button
                   key={pageNumber}
                   className={`pagination-button ${
                     pageNumber === currentPage ? "active bg-red-700" : ""
-                  } 
-    bg-[#ff9f9f] hover:bg-[#ff9f9f8c] text-white font-medium py-2 px-4 rounded ml-2`}
+                  } bg-[#ff9f9f] hover:bg-[#ff9f9f8c] text-white font-medium py-2 px-4 rounded ml-2`}
                   onClick={() => handlePageChange(pageNumber)}
                 >
                   {pageNumber}
