@@ -2,6 +2,10 @@
     display: flex;
    height: 100%;
     .side-bar {
+        position: sticky;
+        top: 0px;
+        height: 100vh;
+        overflow-y: scroll;
         ul {
             background-color: var(--color-primary);
             width: var(--side-bar-width);

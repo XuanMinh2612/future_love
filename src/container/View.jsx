@@ -59,18 +59,14 @@ function ViewResult() {
           <div className="img-swap">
             <div
               className="img-swap-image"
+              ref={(el) => (eventRefs.current[index] = el)}
+              id={dt.ten_su_kien}
               style={{ backgroundImage: `url(${dt.link_da_swap})` }}
             ></div>
             <div className="name">{dt.ten_su_kien}</div>
           </div>
           <div className="about-main flex justify-center">
-            <div
-              className="future-love max-w-7xl"
-              ref={(el) => (eventRefs.current[index] = el)}
-              id={"#" + dt.ten_su_kien}
-            >
-              {dt.noi_dung_su_kien}
-            </div>
+            <div className="future-love max-w-7xl">{dt.noi_dung_su_kien}</div>
           </div>
         </Fragment>
       ))}

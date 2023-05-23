@@ -39,13 +39,13 @@ function SideBar() {
           {!["/About", "/"].includes(location.pathname) &&
             event.map((item, index) => (
               <Fragment key={item.ten_su_kien}>
-                <li
-                  id={"#" + item.ten_su_kien}
+                <a
+                  href={"#" + item.ten_su_kien}
                   ref={(el) => (eventRefs.current[index] = el)}
                   onClick={() => handleEventClick(index)}
                 >
                   {item.ten_su_kien}
-                </li>
+                </a>
               </Fragment>
             ))}
         </ul>

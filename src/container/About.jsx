@@ -7,6 +7,7 @@ import { db } from "../firebase";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
+
 function About() {
   const Api_key = "4b92af7f16b0fb074cc5e1c7adfa512a";
   const server = "http://14.225.7.221:8889/getdata";
@@ -17,54 +18,35 @@ function About() {
   const [isLoading, setIsLoading] = useState(false);
   const [link, setLink] = useState(null);
   const navigate = useNavigate();
-  const uploadImgMale = async () => {
-    const formData = new FormData();
-    formData.append("image", image1);
-    try {
-      if (image1 != null) {
-        const femaleInput = document.getElementById("male");
-        if (femaleInput) {
-          femaleInput.style.display = "none";
-        }
-        let apiresponse = await axios.post(
-          `https://api.imgbb.com/1/upload?key=${Api_key}`,
-          formData
-        );
-        setImage1(apiresponse.data.data.url);
-      }
-    } catch (error) {
-      throw error;
-    } finally {
-    }
-  };
 
-  const uploadImgFeMale = async () => {
+  const uploadImage = async (image, setImage) => {
     const formData = new FormData();
-    formData.append("image", image2);
+    formData.append("image", image);
     try {
-      if (image2 != null) {
-        const femaleInput = document.getElementById("female");
-        if (femaleInput) {
-          femaleInput.style.display = "none";
+      if (image) {
+        const input = document.getElementById(
+          setImage === setImage1 ? "male" : "female"
+        );
+        if (input) {
+          input.style.display = "none";
         }
-        let apiresponse = await axios.post(
+        const apiResponse = await axios.post(
           `https://api.imgbb.com/1/upload?key=${Api_key}`,
           formData
         );
-        setImage2(apiresponse.data.data.url);
+        setImage(apiResponse.data.data.url);
       }
     } catch (error) {
       throw error;
-    } finally {
     }
   };
 
   const fetchData = async () => {
     setIsLoading(true);
     try {
-      await uploadImgMale();
-      await uploadImgFeMale();
-      const reponse = await axios.post(
+      await uploadImage(image1, setImage1);
+      await uploadImage(image2, setImage2);
+      const response = await axios.post(
         `${server}`,
         {},
         {
@@ -74,74 +56,41 @@ function About() {
           },
         }
       );
-      setData(reponse.data);
-      console.log(reponse.data);
+      setData(response.data);
+      console.log(response.data);
       const docRef = await addDoc(collection(db.getFirestore(), "futurelove"), {
-        data: reponse.data,
+        data: response.data,
         image1,
         image2,
         timestamp: serverTimestamp(),
       });
-      setLink(reponse.data.id);
+      setLink(response.data.id);
       setIsLoading(false);
       toast.success("Upload và lưu dữ liệu thành công");
-      navigate("/" + reponse.data.json2[0].id);
+      navigate("/" + response.data.json2[0].id);
     } catch (error) {
       setIsLoading(false);
       throw error;
     }
   };
+
+  const handleChangeImage = async (event, setImage) => {
+    event.preventDefault();
+    let file = event.target.files[0];
+    if (file) {
+      setImage(file);
+    }
+  };
+
   useEffect(() => {
-    uploadImgFeMale();
-    uploadImgMale();
-    console.log("useefêcr");
+    uploadImage(image1, setImage1);
+    uploadImage(image2, setImage2);
+    console.log("useEffect");
   }, [image1, image2]);
 
-  const handleChangeImageMale = async (event) => {
-    event.preventDefault();
-    let file = event.target.files[0];
-    //let id = event.target.id;
-    if (file) {
-      setImage1(file);
-    }
-  };
-  const handleChangeImageFemale = async (event) => {
-    event.preventDefault();
-    let file = event.target.files[0];
-    if (file) {
-      setImage2(file);
-    }
-  };
-  return (
-    <div className="wrapper-about">
-      <div className="about-top">
-        <div className="male">
-          <input type="file" id="male" onChange={handleChangeImageMale} />
-          <div
-            className="image"
-            style={{ backgroundImage: `url(${image1})` }}
-          ></div>
-          <div className="name">
-            <p>Name Male</p>
-          </div>
-        </div>
-        <div className="icon-heart"> </div>
-        <div className="female">
-          <input type="file" id="female" onChange={handleChangeImageFemale} />
-          <div
-            className="image"
-            style={{ backgroundImage: `url(${image2})` }}
-          ></div>
-          <div className="name">Name feMale</div>
-        </div>
-      </div>
-      <div className="about-bottom">
-        <button onClick={fetchData}>
-          {data.length > 0 ? "Try again" : "Start"}
-          <i className="fas fa-sync-alt"></i>
-        </button>
-      </div>
-      {/* {link && (
+  const renderLink = () => {
+    if (link) {
+      return (
         <p
           style={{
             display: "flex",
@@ -158,8 +107,14 @@ function About() {
             Xem lại kết quả của bạn tại đây
           </a>
         </p>
-      )} */}
-      {isLoading && (
+      );
+    }
+    return null;
+  };
+
+  const renderLoading = () => {
+    if (isLoading) {
+      return (
         <div
           style={{
             display: "flex",
@@ -169,21 +124,50 @@ function About() {
         >
           <ReactLoading type={"bars"} color={"#000000"} />
         </div>
-      )}
-      {/* {data?.json1?.map((dt, index) => (
-        <Fragment key={index}>
-          <div className="img-swap">
-            <div
-              className="img-swap-image"
-              style={{ backgroundImage: `url(${dt.Link_img})` }}
-            ></div>
-            <div className="name">{dt.tensukien}</div>
+      );
+    }
+    return null;
+  };
+
+  return (
+    <div className="wrapper-about">
+      <div className="about-top">
+        <div className="male">
+          <input
+            type="file"
+            id="male"
+            onChange={(e) => handleChangeImage(e, setImage1)}
+          />
+          <div
+            className="image"
+            style={{ backgroundImage: `url(${image1})` }}
+          ></div>
+          <div className="name">
+            <p>Name Male</p>
           </div>
-          <div className="about-main flex justify-center   ">
-            <div className="future-love  max-w-7xl">{dt.thongtin}</div>
-          </div>
-        </Fragment>
-      ))} */}
+        </div>
+        <div className="icon-heart"> </div>
+        <div className="female">
+          <input
+            type="file"
+            id="female"
+            onChange={(e) => handleChangeImage(e, setImage2)}
+          />
+          <div
+            className="image"
+            style={{ backgroundImage: `url(${image2})` }}
+          ></div>
+          <div className="name">Name feMale</div>
+        </div>
+      </div>
+      <div className="about-bottom">
+        <button onClick={fetchData}>
+          {data.length > 0 ? "Try again" : "Start"}
+          <i className="fas fa-sync-alt"></i>
+        </button>
+      </div>
+      {renderLink()}
+      {renderLoading()}
     </div>
   );
 }

@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import ReactLoading from "react-loading";
 import { format } from "date-fns";
+import { FcClock } from "react-icons/fc";
+import { BsLink45Deg } from "react-icons/bs";
 
 function History() {
   const [data, setData] = useState([]);
@@ -77,21 +79,27 @@ function History() {
           </div>
         </div>
       ) : (
-        <div className="w-[800px] mx-auto">
+        <div className="w-[1000px] flex flex-col items-center ">
           {currentResults.map((array, index) => (
-            <div key={index} className="my-8">
+            <div key={index} className="my-8 ">
               {array.length > 0 && (
-                <div className="p-4 border-b border-gray-300 text-3xl">
-                  <span className="font-semibold mr-20 text-4xl">
-                    ID: {array[0].id_toan_bo_su_kien}
+                <div className="p-4 border-b border-gray-300 text-3xl flex items-center">
+                  <span className="font-semibold mr-6">
+                    <BsLink45Deg className="inline-block text-4xl mr-2" />
+                    {/* ID: {array[0].id_toan_bo_su_kien} */}
+                    <span className="iconlink">
+                      ID: {array[0].id_toan_bo_su_kien}
+                    </span>
                   </span>
                   <a
                     href={`${window.location.href}${array[0].id_toan_bo_su_kien}`}
+                    className="text-blue-500 hover:text-blue-700"
                   >
                     Xem lại kết quả tại đây
                   </a>
-                  <span className="font-semibold mr-20 ml-36 text-4xl">
-                    Thời gian: {formatDateTime(array[0].real_time)}
+                  <span className="font-semibold ml-6">
+                    <FcClock className="inline-block text-4xl mr-2" />{" "}
+                    {formatDateTime(array[0].real_time)}
                   </span>
                 </div>
               )}

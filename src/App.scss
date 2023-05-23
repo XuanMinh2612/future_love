@@ -1,11 +1,14 @@
+
 .App {
     background-color: var(--color-primary);
     height: 195px;
+    
     .App-header {
         display: flex;
         align-items: center;
         justify-content: center;
-        padding-top: 23px;
+        padding-top: 10px;
+        
         p {
             font-size: 128px;
             font-weight: 400;
