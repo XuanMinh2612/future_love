@@ -6,12 +6,16 @@ import { NavLink, Route, Routes } from "react-router-dom";
 import History from "./container/History";
 
 import ViewResult from "./container/View";
+import Clock from "./ver2/components/clock";
 function App() {
   return (
     <div className="App">
       <header className="App-header static">
         <p>Future Love</p>
         <div className="img-love"></div>
+        <div className="absolute right-10">
+          <Clock />
+        </div>
       </header>
       <div className="flex flex-row">
         <div className="">

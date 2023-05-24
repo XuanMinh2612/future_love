@@ -7,6 +7,7 @@ import { db } from "../firebase";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
+import Clock from "../ver2/components/clock";
 
 function About() {
   const Api_key = "4b92af7f16b0fb074cc5e1c7adfa512a";
@@ -160,6 +161,7 @@ function About() {
           <div className="name">Name feMale</div>
         </div>
       </div>
+
       <div className="about-bottom">
         <button onClick={fetchData}>
           {data.length > 0 ? "Try again" : "Start"}
