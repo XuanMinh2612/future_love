@@ -1,12 +1,14 @@
 import "./App.scss";
 import About from "./container/About";
 import "./container/tailwincss.css";
-import SideBar from "./sideBar/SideBar";
+import SideBar from "./container/SideBar";
 import { NavLink, Route, Routes } from "react-router-dom";
 import History from "./container/History";
 
 import ViewResult from "./container/View";
 import Clock from "./ver2/components/clock";
+import Header from "./ver2/page/Header";
+
 function App() {
   return (
     <div className="App">
@@ -29,6 +31,7 @@ function App() {
           </Routes>
         </div>
       </div>
+      <Header />
     </div>
   );
 }

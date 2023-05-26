@@ -1,8 +1,7 @@
-import { NavLink, useParams, Routes, useLocation } from "react-router-dom";
-import { Fragment, useEffect, useState, useRef } from "react";
-import axios from "axios";
+import { NavLink, useLocation } from "react-router-dom";
+import { Fragment, useRef } from "react";
 import "./SideBar.scss";
-import useEvenStore from "../Store";
+import useEvenStore from "../utils/store";
 
 function SideBar() {
   const event = useEvenStore((state) => state.event);

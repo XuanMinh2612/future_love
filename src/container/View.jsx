@@ -2,7 +2,7 @@ import { Fragment, useEffect, useState, useRef } from "react";
 import "./About.scss";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-import useEvenStore from "../Store";
+import useEvenStore from "../utils/store";
 
 function ViewResult() {
   const { id } = useParams();

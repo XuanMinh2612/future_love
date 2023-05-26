@@ -1,9 +1,9 @@
-import { Fragment, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import "./About.scss";
 import axios from "axios";
 import ReactLoading from "react-loading";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
-import { db } from "../firebase";
+import { db } from "../utils/firebase";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";

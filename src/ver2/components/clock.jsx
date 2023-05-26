@@ -36,7 +36,7 @@ function Clock() {
     return () => clearInterval(interval);
   };
   return (
-    <div className="flex flex-row">
+    <div className="flex flex-row ">
       <div className="w-[67.95px] h-[56px] relative mx-2">
         <div className="w-full h-1/2 bg-white absolute top-0 rounded-[8px] flex items-end justify-between">
           <div className="w-[4px] h-[4px] rounded-full bg-[#24475b] absolute left-2 bottom-1"></div>
