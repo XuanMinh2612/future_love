@@ -2,22 +2,31 @@ import "./App.scss";
 import About from "./container/About";
 import "./container/tailwincss.css";
 import SideBar from "./container/SideBar";
-import { NavLink, Route, Routes } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import History from "./container/History";
-
 import ViewResult from "./container/View";
 import Clock from "./ver2/components/clock";
 import Header from "./ver2/page/Header";
+import useEvenStore from "./utils/store";
+import Test from "./ver2/page/Historyv2";
+import Historyv2 from "./ver2/page/Historyv2";
 
 function App() {
-  return (
+  const version = useEvenStore((state) => state.version);
+  const setVersion = useEvenStore((state) => state.setVersion);
+  const navigate = useNavigate();
+  const toggleVersion = () => {
+    setVersion(version === 2 ? 1 : 2);
+    navigate("/");
+  };
+
+  return version === 1 ? (
     <div className="App">
       <header className="App-header static">
         <p>Future Love</p>
-        <div className="img-love"></div>
-        <div className="absolute right-10">
-          <Clock />
-        </div>
+        <div className="img-love" onClick={toggleVersion}></div>
+
+        <div className="absolute right-10"></div>
       </header>
       <div className="flex flex-row">
         <div className="">
@@ -31,7 +40,10 @@ function App() {
           </Routes>
         </div>
       </div>
-      <Header />
+    </div>
+  ) : (
+    <div>
+      <Historyv2 />
     </div>
   );
 }

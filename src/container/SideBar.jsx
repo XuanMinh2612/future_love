@@ -35,7 +35,7 @@ function SideBar() {
               History
             </NavLink>
           </li>
-          {!["/About", "/"].includes(location.pathname) &&
+          {!["/About", "/", "/History"].includes(location.pathname) &&
             event.map((item, index) => (
               <Fragment key={item.ten_su_kien}>
                 <a

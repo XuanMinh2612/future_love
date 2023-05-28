@@ -6,6 +6,9 @@ module.exports = {
       colors: {
         "custom-pink": "#FF9F9F",
         "custom-red": "#FF2C61",
+        yellow: {
+          500: "#FBBF24",
+        },
       },
     },
   },
