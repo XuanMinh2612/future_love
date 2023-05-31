@@ -8,8 +8,12 @@ function Historyv2() {
     <div className="flex flex-col min-h-screen bg-gradient-to-r from-custom-pink to-custom-red p-10">
       <Header />
       <div className="flex flex-row justify-around">
-        <EventHistory />
-        <Comments />
+        <div className="w-3/6">
+          <EventHistory />
+        </div>
+        <div className="w-2/6">
+          <Comments />
+        </div>
       </div>
     </div>
   );

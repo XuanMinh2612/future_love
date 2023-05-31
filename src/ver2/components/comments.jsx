@@ -3,7 +3,7 @@ import girl from "./image/girl.jpg";
 
 function Comments() {
   return (
-    <div className="w-[600px] h-fit bg-yellow-200 rounded-[36px] text-center font-[Montserrat]">
+    <div className="w-full h-fit bg-yellow-200 rounded-[36px] text-center font-[Montserrat]">
       <ul className="px-14 py-8">
         {[...Array(25)].map((_, index) => (
           <li className="flex flex-row w-full h-32 justify-between" key={index}>
@@ -18,4 +18,5 @@ function Comments() {
     </div>
   );
 }
+
 export default Comments;

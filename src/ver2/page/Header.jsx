@@ -6,7 +6,7 @@ import { SlMenu } from "react-icons/sl";
 import useEvenStore from "../../utils/store";
 
 function Header() {
-  const [showMenu, setShowMenu] = useState(true);
+  const [showMenu, setShowMenu] = useState(false);
   const version = useEvenStore((state) => state.version);
   const setVersion = useEvenStore((state) => state.setVersion);
 
@@ -18,7 +18,7 @@ function Header() {
   };
 
   return (
-    <div className="w-screen h-40">
+    <div className="w-screen h-40" onClick={toggleMenu}>
       <div className="flex flex-row items-center justify-between ">
         <Clock className="" />
         <div className="flex flex-row">
@@ -33,19 +33,25 @@ function Header() {
           />
 
           <SlMenu
-            className="text-[56px] text-white mt-1 font-black mr-20 cursor-pointer"
+            className="text-[56px] text-white mt-1 font-black mr-20 cursor-pointer transition-transform duration-300 hover:scale-125"
             onClick={toggleMenu}
           />
         </div>
       </div>
       {showMenu && (
-        <div className="absolute top-36 right-10 bg-white p-4">
+        <div className="absolute top-36 right-10 w-96">
           <ul>
-            <li>
-              <a href="#">Login</a>
+            <li
+              className="w-full h-24  bg-[#FFF2EB] flex justify-center items-center rounded-t-[16px] font[Starborn] font-semibold text-[28px]  text-[#FF2C61] hover:bg-[#FFCFC5]
+             "
+            >
+              <span href="#">Login</span>
             </li>
-            <li>
-              <a href="#">History</a>
+            <li
+              className="w-full h-24 bg-[#FFF2EB] flex justify-center items-center rounded-b-[16px] font[Starborn] font-semibold text-[28px] text-[#FF2C61] hover:bg-[#FFCFC5]
+             "
+            >
+              <span href="#">History</span>
             </li>
           </ul>
         </div>

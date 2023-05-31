@@ -3,13 +3,12 @@ import About from "./container/About";
 import "./container/tailwincss.css";
 import SideBar from "./container/SideBar";
 import { Route, Routes, useNavigate } from "react-router-dom";
+import React, { useState } from "react";
 import History from "./container/History";
 import ViewResult from "./container/View";
-import Clock from "./ver2/components/clock";
-import Header from "./ver2/page/Header";
 import useEvenStore from "./utils/store";
-import Test from "./ver2/page/Historyv2";
 import Historyv2 from "./ver2/page/Historyv2";
+import Home from "./ver2/page/Home";
 
 function App() {
   const version = useEvenStore((state) => state.version);
@@ -43,7 +42,8 @@ function App() {
     </div>
   ) : (
     <div>
-      <Historyv2 />
+      {/* <Historyv2 /> */}
+      <Home />
     </div>
   );
 }
