@@ -4,6 +4,7 @@ import img from "../components/image/Screenshot_1.png";
 import { BsFillHeartFill } from "react-icons/bs";
 import { SlMenu } from "react-icons/sl";
 import useEvenStore from "../../utils/store";
+import { NavLink, useLocation } from "react-router-dom";
 
 function Header() {
   const [showMenu, setShowMenu] = useState(false);
@@ -45,13 +46,18 @@ function Header() {
               className="w-full h-24  bg-[#FFF2EB] flex justify-center items-center rounded-t-[16px] font[Starborn] font-semibold text-[28px]  text-[#FF2C61] hover:bg-[#FFCFC5]
              "
             >
-              <span href="#">Login</span>
+              <NavLink to="/Home">Home</NavLink>
             </li>
             <li
               className="w-full h-24 bg-[#FFF2EB] flex justify-center items-center rounded-b-[16px] font[Starborn] font-semibold text-[28px] text-[#FF2C61] hover:bg-[#FFCFC5]
              "
             >
-              <span href="#">History</span>
+              <NavLink
+                to="/"
+                className={({ isActive }) => (isActive ? "active" : "")}
+              >
+                History
+              </NavLink>
             </li>
           </ul>
         </div>

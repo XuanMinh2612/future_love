@@ -43,7 +43,11 @@ function App() {
   ) : (
     <div>
       {/* <Historyv2 /> */}
-      <Home />
+
+      <Routes>
+        <Route path="/" element={<Historyv2 />} />
+        <Route path="/Home" element={<Home />} />
+      </Routes>
     </div>
   );
 }

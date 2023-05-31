@@ -54,9 +54,10 @@ function Home() {
   }, [image1, image2]);
 
   return (
-    <div className="flex flex-col min-h-screen bg-gradient-to-r from-custom-pink to-custom-red p-10 h-screen">
+    <div className="flex flex-col min-h-screen bg-gradient-to-r from-custom-pink to-custom-red p-10 h-screen ">
       <Header />
-      <div className="flex flex-row h-4/5  justify-evenly content-center items-center relative">
+
+      <div className="flex flex-row h-4/5  justify-evenly content-center items-center relative top-32">
         <div className="flex flex-col items-center  relative">
           <img src={boy} alt="" className="w-500 h-500 static" />
           <input
