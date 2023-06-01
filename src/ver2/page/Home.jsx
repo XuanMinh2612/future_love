@@ -2,7 +2,8 @@ import React from "react";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import Header from "./Header";
+import Header from "../components/Header";
+
 import boy from "../components/image/nam1.png";
 import girl from "../components/image/nu1.png";
 import { BsFillHeartFill } from "react-icons/bs";
@@ -64,7 +65,7 @@ function Home() {
             onChange={(e) => handleChangeImage(e, setImage1)}
             style={{ backgroundImage: `url(${image1})` }}
             type="file"
-            className="w-[360px] h-[360px]  rounded-[50%] absolute bottom-8 left-8 z-10 bg-center bg-no-repeat bg-cover"
+            className="w-[360px] h-[360px]  rounded-[50%] absolute bottom-8 left-8 z-10 bg-center bg-no-repeat bg-cover bg-[#FFDAB9]"
           />
         </div>
 
@@ -80,7 +81,7 @@ function Home() {
             onChange={(e) => handleChangeImage(e, setImage2)}
             style={{ backgroundImage: `url(${image2})` }}
             type="file"
-            className="w-[360px] h-[360px]  rounded-[50%] absolute top-8 right-8  z-10 bg-center bg-no-repeat bg-cover"
+            className="w-[360px] h-[360px]  rounded-[50%] absolute top-8 right-8  z-10 bg-center bg-no-repeat bg-cover bg-[#FFDAB9] "
           />
         </div>
       </div>

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Clock from "../components/clock";
+import Clock from "./clock";
 import img from "../components/image/Screenshot_1.png";
 import { BsFillHeartFill } from "react-icons/bs";
 import { SlMenu } from "react-icons/sl";
@@ -30,7 +30,7 @@ function Header() {
         <div className="flex flex-row">
           <BsFillHeartFill
             onClick={toggleVersion}
-            className="text-[54px] text-white mt-2 mr-10 transition-transform duration-300 hover:scale-125 "
+            className="text-[54px] text-white mt-2 mr-10 transition-transform duration-300 hover:scale-125  "
           />
 
           <SlMenu
@@ -57,6 +57,17 @@ function Header() {
                 className={({ isActive }) => (isActive ? "active" : "")}
               >
                 History
+              </NavLink>
+            </li>
+            <li
+              className="w-full h-24 bg-[#FFF2EB] flex justify-center items-center rounded-b-[16px] font[Starborn] font-semibold text-[28px] text-[#FF2C61] hover:bg-[#FFCFC5]
+             "
+            >
+              <NavLink
+                to="/View"
+                className={({ isActive }) => (isActive ? "active" : "")}
+              >
+                View
               </NavLink>
             </li>
           </ul>

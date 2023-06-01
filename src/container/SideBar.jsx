@@ -21,7 +21,7 @@ function SideBar() {
         <ul>
           <li>
             <NavLink
-              to="/About"
+              to="/Home"
               className={({ isActive }) => (isActive ? "active" : "")}
             >
               About
@@ -35,7 +35,7 @@ function SideBar() {
               History
             </NavLink>
           </li>
-          {!["/About", "/", "/History"].includes(location.pathname) &&
+          {!["/Home", "/", "/History"].includes(location.pathname) &&
             event.map((item, index) => (
               <Fragment key={item.ten_su_kien}>
                 <a

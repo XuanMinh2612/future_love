@@ -9,6 +9,7 @@ import ViewResult from "./container/View";
 import useEvenStore from "./utils/store";
 import Historyv2 from "./ver2/page/Historyv2";
 import Home from "./ver2/page/Home";
+import View from "./ver2/page/viewv2";
 
 function App() {
   const version = useEvenStore((state) => state.version);
@@ -33,7 +34,7 @@ function App() {
         </div>
         <div className="flex justify-center w-screen">
           <Routes>
-            <Route path="/About" element={<About />} />
+            <Route path="/Home" element={<About />} />
             <Route path="/:id" element={<ViewResult />} />
             <Route path="/" element={<History />} />
           </Routes>
@@ -42,11 +43,10 @@ function App() {
     </div>
   ) : (
     <div>
-      {/* <Historyv2 /> */}
-
       <Routes>
         <Route path="/" element={<Historyv2 />} />
         <Route path="/Home" element={<Home />} />
+        <Route path="/View" element={<View />} />
       </Routes>
     </div>
   );
