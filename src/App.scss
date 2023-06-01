@@ -1,36 +1,9 @@
 .App {
     background-color: var(--color-primary);
-    height: 195px;
-    
-    .App-header {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding-top: 10px;
-        
-        p {
-            font-size: 128px;
-            font-weight: 400;
-            line-height: 171.39px;
-            margin: 0;
         }
         .img-love {
-            width: 133px;
-            height: 114px;
-            margin-left: 175px;
-            background-image: url(../image/Screenshot_1.png);
-            background-repeat: no-repeat;
-            background-position: center;
-            transition: transform 0.3s; // Thêm hiệu ứng chuyển đổi trong 0.3s
-            transform-origin: center; // Đảm bảo không làm thay đổi bố cục của header
-            
-            &:hover {
-                transform: scale(1.5); // Khi di chuột vào, phóng to lên 1.2 lần kích thước ban đầu
-            }
-        }
+            background-image: url(../image/Screenshot_1.png);   
     }
-}
-
 @media (max-width: 1023px) {
     .App {
         height: 140px;

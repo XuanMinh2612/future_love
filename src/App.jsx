@@ -21,10 +21,15 @@ function App() {
   };
 
   return version === 1 ? (
-    <div className="App">
-      <header className="App-header static">
-        <p>Future Love</p>
-        <div className="img-love" onClick={toggleVersion}></div>
+    <div className="App h-[195px] ">
+      <header className="App-header static flex items-center justify-center pt-2">
+        <p className="text-[128px] font-normal m-0 leading-[171px]">
+          Future Love
+        </p>
+        <div
+          className="img-love w-[133px] h-[114px] bg-no-repeat bg-center transition-transform duration-300 transform-origin-center transform hover:scale-150"
+          onClick={toggleVersion}
+        ></div>
 
         <div className="absolute right-10"></div>
       </header>
