@@ -64,7 +64,7 @@ function Header() {
              "
             >
               <NavLink
-                to="/View"
+                to="/:id"
                 className={({ isActive }) => (isActive ? "active" : "")}
               >
                 View

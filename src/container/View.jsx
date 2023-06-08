@@ -58,7 +58,7 @@ function ViewResult() {
         <Fragment key={index}>
           <div className="img-swap">
             <div
-              className="img-swap-image"
+              className="img-swap-image "
               ref={(el) => (eventRefs.current[index] = el)}
               id={dt.ten_su_kien}
               style={{ backgroundImage: `url(${dt.link_da_swap})` }}

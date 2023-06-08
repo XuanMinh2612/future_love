@@ -4,9 +4,6 @@ import { AiFillHeart } from "react-icons/ai";
 
 import ReactLoading from "react-loading";
 import { format } from "date-fns";
-import { FcClock } from "react-icons/fc";
-import { BsLink45Deg } from "react-icons/bs";
-import { Link } from "react-router-dom";
 
 function EventHistory() {
   const [data, setData] = useState([]);
@@ -111,7 +108,7 @@ function EventHistory() {
               />
               {/* first event */}
               <div className="flex flex-col p-7">
-                <span className="text-6xl">{array[0].id_toan_bo_su_kien}</span>
+                <span className="text-6xl">{array[0].ten_su_kien}</span>
                 <p className="text-3xl font-[Montserrat] max-w-lg pt-3 max-h-96 overflow-scroll mt-2">
                   {array[0].noi_dung_su_kien}
                 </p>

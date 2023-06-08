@@ -3,15 +3,17 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Header from "../components/Header";
-
 import boy from "../components/image/nam1.png";
 import girl from "../components/image/nu1.png";
 import { BsFillHeartFill } from "react-icons/bs";
-import girls from "../components/image/girl.jpg";
+import ReactLoading from "react-loading";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function Home() {
   const Api_key = "4b92af7f16b0fb074cc5e1c7adfa512a";
-  const server = "http://14.225.7.221:8889/getdata";
+  const server = "http://14.225.7.221:9090/getdata";
+
   const [data, setData] = useState([]);
   const [image1, setImage1] = useState(null);
   const [image2, setImage2] = useState(null);
@@ -48,11 +50,55 @@ function Home() {
     }
   };
 
+  const fetchData = async () => {
+    setIsLoading(true);
+    try {
+      await uploadImage(image1, setImage1);
+      await uploadImage(image2, setImage2);
+      const response = await axios.post(
+        `${server}`,
+        {},
+        {
+          headers: {
+            Link_img1: image1,
+            Link_img2: image2,
+          },
+        }
+      );
+      setData(response.data);
+      console.log(response.data);
+      setLink(response.data.id);
+      setIsLoading(false);
+      toast.success("Upload và lưu dữ liệu thành công");
+      navigate("/" + response.data.json2[0].id_toan_bo_su_kien);
+    } catch (error) {
+      setIsLoading(false);
+      throw error;
+    }
+  };
+
   useEffect(() => {
     uploadImage(image1, setImage1);
     uploadImage(image2, setImage2);
     console.log("useEffect");
   }, [image1, image2]);
+
+  const renderLoading = () => {
+    if (isLoading) {
+      return (
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <ReactLoading type={"bars"} color={"#000000"} />
+        </div>
+      );
+    }
+    return null;
+  };
 
   return (
     <div className="flex flex-col min-h-screen bg-gradient-to-r from-custom-pink to-custom-red p-10 h-screen ">
@@ -71,7 +117,10 @@ function Home() {
 
         <div className="flex flex-col items-center transition-transform duration-300 hover:scale-125 ">
           <BsFillHeartFill className="w-48 h-48 text-[#FF9F9F] " />
-          <span className="text-4xl font-bold mt-14 absolute text-[#7A1E3E]">
+          <span
+            onClick={fetchData}
+            className="text-4xl font-bold mt-14 absolute text-[#7A1E3E]"
+          >
             Start
           </span>
         </div>

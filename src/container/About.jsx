@@ -7,11 +7,10 @@ import { db } from "../utils/firebase";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
-import Clock from "../ver2/components/clock";
 
 function About() {
   const Api_key = "4b92af7f16b0fb074cc5e1c7adfa512a";
-  const server = "http://14.225.7.221:8889/getdata";
+  const server = "http://14.225.7.221:9090/getdata";
 
   const [data, setData] = useState([]);
   const [image1, setImage1] = useState(null);
@@ -68,7 +67,7 @@ function About() {
       setLink(response.data.id);
       setIsLoading(false);
       toast.success("Upload và lưu dữ liệu thành công");
-      navigate("/" + response.data.json2[0].id);
+      navigate("/" + response.data.json2[0].id_toan_bo_su_kien);
     } catch (error) {
       setIsLoading(false);
       throw error;

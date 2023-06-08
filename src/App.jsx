@@ -3,7 +3,7 @@ import About from "./container/About";
 import "./container/tailwincss.css";
 import SideBar from "./container/SideBar";
 import { Route, Routes, useNavigate } from "react-router-dom";
-import React, { useState } from "react";
+import React from "react";
 import History from "./container/History";
 import ViewResult from "./container/View";
 import useEvenStore from "./utils/store";
@@ -51,7 +51,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Historyv2 />} />
         <Route path="/Home" element={<Home />} />
-        <Route path="/View" element={<View />} />
+        <Route path="/:id" element={<View />} />
       </Routes>
     </div>
   );
